@@ -1,6 +1,6 @@
 <template>
   <view class="t-dropdown" :class="`${visible ? 'show' : ''}`" @click="onClose">
-    <view class="content">
+    <view class="content" @click.stop>
       <slot></slot>
       <view class="footer-button">
         <view class="btn btn-cancel" @click="onClose">取消</view>
@@ -45,8 +45,8 @@ const onOk = () => {
     transition: all 0.3s;
     .footer-button {
       display: flex;
-      justify-content: space-around;
-      padding: 30rpx;
+      justify-content: space-between;
+      padding: 40rpx;
       .btn {
         display: flex;
         justify-content: center;
@@ -59,11 +59,17 @@ const onOk = () => {
         &-cancel {
           color: #999;
           border-color: #999;
+          &:hover {
+            background: #f5f5f5;
+          }
         }
         &-primary {
           color: #fff;
           border-color: var(--theme-primary);
           background: var(--theme-primary);
+          &:hover {
+            background: #333;
+          }
         }
       }
     }

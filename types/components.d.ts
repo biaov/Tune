@@ -12,17 +12,23 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./../src/components/t-tabs copy.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TDropdown: typeof import('./../src/components/t-dropdown.vue')['default']
     TPage: typeof import('./../src/components/t-page.vue')['default']
+    TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
+    TTabs: typeof import('./../src/components/t-tabs.vue')['default']
   }
 }
 
 // For TSX support
 declare global {
+  const copy: typeof import('./../src/components/t-tabs copy.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
   const TDropdown: typeof import('./../src/components/t-dropdown.vue')['default']
   const TPage: typeof import('./../src/components/t-page.vue')['default']
+  const TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
+  const TTabs: typeof import('./../src/components/t-tabs.vue')['default']
 }

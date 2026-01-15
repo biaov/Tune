@@ -1,9 +1,14 @@
 import type { RadioGroupOnChangeEvent } from '@uni-helper/uni-app-types'
+import type { USEMenuOption, USETabsOption } from './types.d'
+import { SortEnum, TabEnum } from './enums'
+import PaneSong from './components/pane-song.vue'
+import PaneSinger from './components/pane-singer.vue'
+import PanePlaylist from './components/pane-playlist.vue'
 
 /**
  * 菜单
  */
-export const useMenu = () => {
+export const useMenu = ({ formState, currentSortValue }: USEMenuOption) => {
   const menu = [
     {
       path: '/pages/search/index',
@@ -19,7 +24,7 @@ export const useMenu = () => {
     }
   ]
 
-  const [sortVisible, setSortVisible] = useState(true)
+  const [sortVisible, setSortVisible] = useState(false)
 
   const onClickItem = (item: (typeof menu)[0]) => {
     if (item.path) {
@@ -29,12 +34,13 @@ export const useMenu = () => {
 
     switch (item.key) {
       case 'sort':
+        currentSortValue.value = formState.sort
         setSortVisible(true)
         break
     }
   }
 
-  return { menu, onClickItem, sortVisible }
+  return { menu, onClickItem, sortVisible, setSortVisible }
 }
 
 /**
@@ -43,36 +49,63 @@ export const useMenu = () => {
 export const useSortModal = () => {
   const sortList = [
     {
-      value: 'name-asc',
+      value: SortEnum.nameAsc,
       label: '按名称升序'
     },
     {
-      value: 'name-desc',
+      value: SortEnum.nameDesc,
       label: '按名称倒序'
     },
     {
-      value: 'author-asc',
-      label: '按作者升序'
+      value: SortEnum.authorAsc,
+      label: '按歌手升序'
     },
     {
-      value: 'author-desc',
-      label: '按作者倒序'
+      value: SortEnum.authorDesc,
+      label: '按歌手倒序'
     },
     {
-      value: 'create-asc',
+      value: SortEnum.createAsc,
       label: '按创建时间升序'
     },
     {
-      value: 'create-desc',
+      value: SortEnum.createDesc,
       label: '按创建时间倒序'
     }
   ]
-  const defaultSortValue = sortList.at(-1)!.value
-  const currentSortValue = ref(defaultSortValue)
+  const currentSortValue = ref<SortEnum>(SortEnum.createDesc)
 
   const onSortChange = (e: RadioGroupOnChangeEvent) => {
-    currentSortValue.value = e.detail.value
+    currentSortValue.value = e.detail.value as SortEnum
   }
 
-  return { currentSortValue, defaultSortValue, sortList, onSortChange }
+  return { currentSortValue, sortList, onSortChange }
+}
+
+/**
+ * 标签
+ */
+export const useTabs = ({ formState }: USETabsOption) => {
+  const tabs = [
+    {
+      value: TabEnum.song,
+      label: '歌曲',
+      component: () => h(PaneSong)
+    },
+    {
+      value: TabEnum.singer,
+      label: '歌手',
+      component: () => h(PaneSinger)
+    },
+    {
+      value: TabEnum.playlist,
+      label: '播放列表',
+      component: () => h(PanePlaylist)
+    }
+  ]
+  const onClickTab = (index: number) => {
+    formState.activeTabIndex = index
+  }
+
+  return { tabs, onClickTab }
 }
