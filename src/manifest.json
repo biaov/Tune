@@ -1,0 +1,118 @@
+{
+  "name": "Tune",
+  "appid": "H5B979BEE",
+  "description": "一个简单的音乐播放器",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "locale": "zh-Hans",
+  /* 5+App特有相关 */
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "splashscreen": {
+      "target": "id:1",
+      "autoclose": true,
+      "waiting": true,
+      "delay": 0
+    },
+    "launchwebview": {
+      "render": "always",
+      "id": "1",
+      "kernel": "WKWebview"
+    },
+    "popGesture": "close",
+    /* 模块配置 */
+    "modules": {
+      "audio": {
+        "mp3": {
+          "description": "Android平台录音支持MP3格式文件"
+        }
+      }
+    },
+    /* 应用发布信息 */
+    "distribute": {
+      /* android打包配置 */
+      "android": {
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+          "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+          "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+          "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+          "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+          "<uses-feature android:name=\"android.hardware.camera\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+        ],
+        "minSdkVersion": 30,
+        "targetSdkVersion": 30,
+        "schemes": "tune"
+      },
+      /* ios打包配置 */
+      "ios": {
+        "idfa": false
+      },
+      /* SDK配置 */
+      "sdkConfigs": {},
+      "icons": {
+        "android": {
+          "hdpi": "static/res/icons/72x72.png",
+          "xhdpi": "static/res/icons/96x96.png",
+          "xxhdpi": "static/res/icons/144x144.png",
+          "xxxhdpi": "static/res/icons/192x192.png"
+        },
+        "ios": {
+          "appstore": "static/res/icons/1024x1024.png",
+          "ipad": {
+            "app": "static/res/icons/76x76.png",
+            "app@2x": "static/res/icons/152x152.png",
+            "notification": "static/res/icons/20x20.png",
+            "notification@2x": "static/res/icons/40x40.png",
+            "proapp@2x": "static/res/icons/167x167.png",
+            "settings": "static/res/icons/29x29.png",
+            "settings@2x": "static/res/icons/58x58.png",
+            "spotlight": "static/res/icons/40x40.png",
+            "spotlight@2x": "static/res/icons/80x80.png"
+          },
+          "iphone": {
+            "app@2x": "static/res/icons/120x120.png",
+            "app@3x": "static/res/icons/180x180.png",
+            "notification@2x": "static/res/icons/40x40.png",
+            "notification@3x": "static/res/icons/60x60.png",
+            "settings@2x": "static/res/icons/58x58.png",
+            "settings@3x": "static/res/icons/87x87.png",
+            "spotlight@2x": "static/res/icons/80x80.png",
+            "spotlight@3x": "static/res/icons/120x120.png"
+          }
+        }
+      },
+      "splashscreen": {
+        "androidStyle": "default",
+        "android": {
+          "hdpi": "static/res/launch.png",
+          "xhdpi": "static/res/launch.png",
+          "xxhdpi": "static/res/launch.png"
+        }
+      }
+    }
+  },
+  "h5": {
+    "usingComponents": true,
+    "devServer": {},
+    "router": {
+      "mode": "history"
+    }
+  },
+  "uniStatistics": {
+    "enable": false
+  },
+  "vueVersion": "3"
+}

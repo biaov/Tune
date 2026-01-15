@@ -1,0 +1,54 @@
+{
+  "name": "tune",
+  "version": "1.0.0",
+  "description": "一个简单的本地音乐播放器 👍",
+  "scripts": {
+    "start": "npm run dev:h5",
+    "dev:app": "uni -p app-plus",
+    "dev:h5": "uni",
+    "build:app": "uni build -p app-plus",
+    "build:h5": "uni build"
+  },
+  "author": {
+    "name": "biaov",
+    "email": "biaov@qq.com",
+    "url": "https://github.com/biaov/tune"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@dcloudio/uni-app": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/uni-app-plus": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/uni-components": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/uni-h5": "^3.0.0-alpha-5000020260104004",
+    "dayjs": "^1.11.19",
+    "vue": "^3.5.26",
+    "vue-i18n": "^11.2.8"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.4.28",
+    "@dcloudio/uni-automator": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/uni-cli-shared": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/uni-stacktracey": "^3.0.0-alpha-5000020260104004",
+    "@dcloudio/vite-plugin-uni": "^3.0.0-alpha-5000020260104004",
+    "@uni-helper/uni-app-types": "^1.0.0-alpha.7",
+    "@vue/runtime-core": "^3.5.26",
+    "@vue/tsconfig": "^0.8.1",
+    "less": "^4.5.1",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3",
+    "unplugin-auto-import": "^20.3.0",
+    "unplugin-vue-components": "^30.0.0",
+    "vite": "^5.2.8",
+    "vue-tsc": "^3.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biaov/tune.git"
+  },
+  "bugs": {
+    "url": "https://github.com/biaov/tune/issues"
+  },
+  "license": "ISC"
+}
