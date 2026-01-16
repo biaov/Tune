@@ -56,6 +56,8 @@ declare global {
   const readonly: typeof import('vue').readonly
   const ref: typeof import('vue').ref
   const resolveComponent: typeof import('vue').resolveComponent
+  const settingStore: typeof import('../src/store/setting').settingStore
+  const settingStoreState: typeof import('../src/store/setting').settingStoreState
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef

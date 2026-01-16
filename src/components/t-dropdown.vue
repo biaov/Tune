@@ -3,8 +3,8 @@
     <view class="content" @click.stop>
       <slot></slot>
       <view class="footer-button">
-        <view class="btn btn-cancel" @click="onClose">取消</view>
-        <view class="btn btn-primary" @click="onOk">确定</view>
+        <t-button width="300rpx" type="info" @click="onClose">取消</t-button>
+        <t-button width="300rpx" type="primary" @click="onOk">确定</t-button>
       </view>
     </view>
   </view>
@@ -47,31 +47,6 @@ const onOk = () => {
       display: flex;
       justify-content: space-between;
       padding: 40rpx;
-      .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 300rpx;
-        height: 80rpx;
-        font-size: 24rpx;
-        border: 1px solid;
-        border-radius: 10rpx;
-        &-cancel {
-          color: #999;
-          border-color: #999;
-          &:hover {
-            background: #f5f5f5;
-          }
-        }
-        &-primary {
-          color: #fff;
-          border-color: var(--theme-primary);
-          background: var(--theme-primary);
-          &:hover {
-            background: #333;
-          }
-        }
-      }
     }
   }
   &.show {

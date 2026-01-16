@@ -15,7 +15,7 @@
         </view>
       </view>
     </view>
-    <view class="container">
+    <view class="container" style="--header-height: calc(var(--status-bar-height) + 220rpx)">
       <t-tabs v-model="formState.activeTabIndex">
         <t-tab-pane :tab="item.value" v-for="(item, index) in tabs" :key="index">
           <component :is="item.component" />
