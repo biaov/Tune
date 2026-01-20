@@ -2,7 +2,8 @@
   <view class="t-dropdown" :class="`${visible ? 'show' : ''}`" @click="onClose">
     <view class="content" @click.stop>
       <slot></slot>
-      <view class="footer-button">
+      <slot name="footer"></slot>
+      <view class="footer-button" v-if="!slot.footer">
         <t-button width="300rpx" type="info" @click="onClose">取消</t-button>
         <t-button width="300rpx" type="primary" @click="onOk">确定</t-button>
       </view>
@@ -13,6 +14,10 @@
 const emit = defineEmits<{
   (e: 'ok'): void
 }>()
+const slot = defineSlots<{
+  default?: () => void
+  footer?: () => void
+}>()
 const visible = defineModel<boolean>('visible', { default: false })
 
 const onClose = () => {
@@ -22,6 +27,10 @@ const onClose = () => {
 const onOk = () => {
   emit('ok')
 }
+const instance = getCurrentInstance()
+onMounted(() => {
+  document.querySelector('.t-page')!.appendChild(instance!.proxy!.$el)
+})
 </script>
 <style scoped lang="less">
 .t-dropdown {

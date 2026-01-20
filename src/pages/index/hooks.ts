@@ -1,14 +1,10 @@
 import type { RadioGroupOnChangeEvent } from '@uni-helper/uni-app-types'
-import type { USEMenuOption, USETabsOption } from './types.d'
-import { SortEnum, TabEnum } from './enums'
-import PaneSong from './components/pane-song.vue'
-import PaneSinger from './components/pane-singer.vue'
-import PanePlaylist from './components/pane-playlist.vue'
+import type { USEMenuOption } from './types.d'
 
 /**
  * 菜单
  */
-export const useMenu = ({ formState, currentSortValue }: USEMenuOption) => {
+export const useMenu = ({ currentSortValue }: USEMenuOption) => {
   const menu = [
     {
       path: '/pages/search/index',
@@ -34,7 +30,7 @@ export const useMenu = ({ formState, currentSortValue }: USEMenuOption) => {
 
     switch (item.key) {
       case 'sort':
-        currentSortValue.value = formState.sort
+        currentSortValue.value = songStore.state.sortType
         setSortVisible(true)
         break
     }
@@ -57,11 +53,11 @@ export const useSortModal = () => {
       label: '按名称倒序'
     },
     {
-      value: SortEnum.authorAsc,
+      value: SortEnum.artistAsc,
       label: '按歌手升序'
     },
     {
-      value: SortEnum.authorDesc,
+      value: SortEnum.artistDesc,
       label: '按歌手倒序'
     },
     {
@@ -80,32 +76,4 @@ export const useSortModal = () => {
   }
 
   return { currentSortValue, sortList, onSortChange }
-}
-
-/**
- * 标签
- */
-export const useTabs = ({ formState }: USETabsOption) => {
-  const tabs = [
-    {
-      value: TabEnum.song,
-      label: '歌曲',
-      component: () => h(PaneSong)
-    },
-    {
-      value: TabEnum.singer,
-      label: '歌手',
-      component: () => h(PaneSinger)
-    },
-    {
-      value: TabEnum.playlist,
-      label: '播放列表',
-      component: () => h(PanePlaylist)
-    }
-  ]
-  const onClickTab = (index: number) => {
-    formState.activeTabIndex = index
-  }
-
-  return { tabs, onClickTab }
 }

@@ -3,14 +3,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: var(--status-bar-height) 0 20rpx;
+  padding-top: var(--status-bar-height);
   background: var(--bg-default);
   z-index: 3;
   &-menu {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20rpx;
     .title {
       font-weight: bold;
       color: var(--text-color);
@@ -33,53 +32,11 @@
       }
     }
   }
-  &-tabs {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80rpx;
-    line-height: 80rpx;
-    color: #999;
-    padding: 0 60rpx;
-
-    .item {
-      flex: 1;
-      height: 80rpx;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: all 0.2s;
-      font-size: 28rpx;
-      font-weight: normal;
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-        width: 40rpx;
-        @size: 6rpx;
-        height: @size;
-        // border-radius: @size @size 0 0;
-        transition: all 0.2s;
-      }
-      &.active {
-        color: var(--theme-primary);
-        font-size: 30rpx;
-        font-weight: bold;
-        &::after {
-          background: var(--theme-primary);
-        }
-      }
-    }
-  }
 }
 
 .container {
-  padding-top: 220rpx;
+  padding-top: 100rpx;
+  padding-bottom: calc(90rpx + var(--ios-bottom-height));
 }
 
 .dropdown-sort {

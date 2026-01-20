@@ -2,32 +2,82 @@
   <view class="pane-song" v-if="list.length">
     <view class="count">{{ list.length }} 首歌曲</view>
     <view class="list w-full">
-      <view v-for="(item, index) in list" :key="index" class="item w-full" :class="{ active: playIndex === index }">
-        <view class="image shrink-0">
-          <image :src="item.url" class="w-full h-full" mode="aspectFill" />
-          <t-animation-play :open="isPlay" v-if="playIndex === index" />
-        </view>
-        <view class="info">
-          <view class="truncate">{{ item.name }}</view>
-          <view class="artist truncate">{{ item.artist }}</view>
-        </view>
-        <t-icon name="more" width="80rpx" height="100rpx" icon-size="30rpx" class="icon" />
-      </view>
+      <t-song-item v-for="(item, index) in list" :key="index" :item="item" :active="songStore.state.playId === item.id" more @click="onClickPlay(item)" @click-mor="onMoreClick(item)" />
       <view class="placeholder">~~ 没有更多啦 ~~</view>
     </view>
   </view>
   <t-scan-file v-else />
+  <t-dropdown v-model:visible="detailVisible">
+    <view class="modal-title">详情</view>
+    <view class="modal-list">
+      <view class="item" v-for="(item, index) in modalList" :key="index" @click="onModalItem(item)">
+        <t-icon :name="item.icon" width="40rpx" height="40rpx" icon-size="30rpx" />
+        {{ item.label }}
+      </view>
+    </view>
+    <template #footer>
+      <view class="model-footer">
+        <t-button type="info" @click="setDetailVisible(false)">关闭</t-button>
+      </view>
+    </template>
+  </t-dropdown>
 </template>
 
 <script lang="ts" setup>
-const isPlay = computed(() => settingStore.state.isPlay)
-const list = Array.from({ length: 4 }, (_, index) => ({
-  id: index,
-  name: `歌曲${index + 1}`,
-  artist: `歌手${index + 1}`,
-  url: `https://dummyimage.com/100x100/f60&text=歌曲${index + 1}`
-}))
-const playIndex = ref(0)
+import { songStore } from '@/store/song'
+import { ModalButtonType } from '../enums'
+
+const list = computed(() =>
+  songStore.state.songs.toSorted((a, b) => {
+    switch (songStore.state.sortType) {
+      case SortEnum.nameAsc:
+        return a.name.localeCompare(b.name, 'zh-CN')
+      case SortEnum.nameDesc:
+        return b.name.localeCompare(a.name, 'zh-CN')
+      case SortEnum.artistAsc:
+        return a.artist.localeCompare(b.artist, 'zh-CN')
+      case SortEnum.artistDesc:
+        return b.artist.localeCompare(a.artist, 'zh-CN')
+      case SortEnum.createAsc:
+        return dayjs(a.createdTime) - dayjs(b.createdTime)
+      case SortEnum.createDesc:
+        return dayjs(b.createdTime) - dayjs(a.createdTime)
+    }
+  })
+)
+const moreItem = ref<SongItemType | null>(null)
+const onClickPlay = (item: SongItemType) => {
+  songStore.onUpdatePlayId(item.id)
+}
+const onMoreClick = (item: SongItemType) => {
+  moreItem.value = item
+  setDetailVisible(true)
+}
+const [detailVisible, setDetailVisible] = useState(false)
+
+const modalList = [
+  {
+    label: '播放',
+    value: ModalButtonType.play,
+    icon: 'play'
+  },
+  {
+    label: '删除',
+    value: ModalButtonType.delete,
+    icon: 'delete'
+  }
+]
+const onModalItem = (item: (typeof modalList)[0]) => {
+  switch (item.value) {
+    case ModalButtonType.play:
+      onClickPlay(moreItem.value!)
+      break
+    case ModalButtonType.delete:
+      songStore.removeSong(moreItem.value!.id)
+      break
+  }
+  setDetailVisible(false)
+}
 </script>
 
 <style scoped lang="less">
@@ -39,41 +89,6 @@ const playIndex = ref(0)
     margin-bottom: 20rpx;
   }
   .list {
-    .item {
-      display: flex;
-      gap: 20rpx;
-      margin-bottom: 30rpx;
-      .image {
-        @size: 100rpx;
-        position: relative;
-        width: @size;
-        height: @size;
-        border-radius: 10rpx;
-        overflow: hidden;
-      }
-      .info {
-        width: 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .artist {
-          margin-top: 10rpx;
-          color: #999;
-        }
-      }
-      .icon {
-        transform: rotate(90deg);
-      }
-      &.active {
-        .info {
-          color: var(--color-primary-2);
-          .artist {
-            color: var(--color-primary-2);
-          }
-        }
-      }
-    }
     .placeholder {
       display: flex;
       align-items: center;
@@ -82,5 +97,43 @@ const playIndex = ref(0)
       color: rgba(0, 0, 0, 0.3);
     }
   }
+}
+.modal-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 30rpx;
+}
+.modal-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30rpx;
+  .item {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10rpx;
+    height: 128rpx;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top-width: 0;
+    border-left-width: 0;
+    padding: 20rpx 0;
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      border-top-width: 1px;
+    }
+    &:nth-child(4n + 1) {
+      border-left-width: 1px;
+    }
+    &:active {
+      background: var(--bg-active);
+    }
+  }
+}
+.model-footer {
+  padding: 30rpx;
 }
 </style>

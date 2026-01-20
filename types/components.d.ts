@@ -22,6 +22,7 @@ declare module 'vue' {
     TPage: typeof import('./../src/components/t-page.vue')['default']
     TScan: typeof import('./../src/components/t-scan.vue')['default']
     TScanFile: typeof import('./../src/components/t-scan-file.vue')['default']
+    TSongItem: typeof import('./../src/components/t-song-item.vue')['default']
     TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
     TTabs: typeof import('./../src/components/t-tabs.vue')['default']
   }
@@ -39,6 +40,7 @@ declare global {
   const TPage: typeof import('./../src/components/t-page.vue')['default']
   const TScan: typeof import('./../src/components/t-scan.vue')['default']
   const TScanFile: typeof import('./../src/components/t-scan-file.vue')['default']
+  const TSongItem: typeof import('./../src/components/t-song-item.vue')['default']
   const TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
   const TTabs: typeof import('./../src/components/t-tabs.vue')['default']
 }

@@ -1,5 +1,5 @@
 <template>
-  <view class="t-animation-play">
+  <view class="t-animation-play" :class="{ open }">
     <view class="content">
       <view class="line" v-for="_ in 3"></view>
     </view>
@@ -58,6 +58,7 @@ const props = withDefaults(
     .line {
       width: @width;
       animation: 1s linear infinite;
+      animation-play-state: paused;
       background: #fff;
       border-radius: @width;
 
@@ -67,6 +68,11 @@ const props = withDefaults(
           animation-name: @value;
         }
       });
+    }
+  }
+  &.open {
+    .line {
+      animation-play-state: running;
     }
   }
 }

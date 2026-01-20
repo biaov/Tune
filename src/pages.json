@@ -4,7 +4,11 @@
       "path": "pages/index/index"
     },
     {
-      "path": "pages/play/index"
+      "path": "pages/detail/index",
+      "style": {
+        "navigationBarTitleText": "歌曲详情",
+        "navigationStyle": "default"
+      }
     },
     {
       "path": "pages/mine/index",

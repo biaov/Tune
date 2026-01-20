@@ -1,32 +1,3 @@
-/**
- * 排序枚举
- */
-export enum SortEnum {
-  /**
-   * 按名称升序
-   */
-  nameAsc = 'name-asc',
-  /**
-   * 按名称倒序
-   */
-  nameDesc = 'name-desc',
-  /**
-   * 按歌手升序
-   */
-  authorAsc = 'author-asc',
-  /**
-   * 按歌手倒序
-   */
-  authorDesc = 'author-desc',
-  /**
-   * 按创建时间升序
-   */
-  createAsc = 'create-asc',
-  /**
-   * 按创建时间倒序
-   */
-  createDesc = 'create-desc'
-}
 
 /**
  * 标签枚举
@@ -40,8 +11,18 @@ export enum TabEnum {
    * 歌手标签
    */
   singer = 'singer',
+}
+
+/**
+ * 弹窗按钮枚举
+ */
+export enum ModalButtonType {
   /**
-   * 播放列表标签
+   * 播放按钮
    */
-  playlist = 'playlist'
+  play = 'play',
+  /**
+   * 删除按钮
+   */
+  delete = 'delete'
 }

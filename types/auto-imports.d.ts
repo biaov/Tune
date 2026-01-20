@@ -7,6 +7,8 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const PlayTypeEnum: typeof import('../src/enums/type').PlayTypeEnum
+  const SortEnum: typeof import('../src/enums/type').SortEnum
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
   const customRef: typeof import('vue').customRef
@@ -61,6 +63,7 @@ declare global {
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
+  const songStore: typeof import('../src/store/song').songStore
   const toRaw: typeof import('vue').toRaw
   const toRef: typeof import('vue').toRef
   const toRefs: typeof import('vue').toRefs
@@ -69,12 +72,13 @@ declare global {
   const unref: typeof import('vue').unref
   const useAttrs: typeof import('vue').useAttrs
   const useCssModule: typeof import('vue').useCssModule
-  const useCssVars: typeof import('vue').useCssVars
+  const useCssVars: typeof import('../src/composables/useCssVars').useCssVars
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
   const useSlots: typeof import('vue').useSlots
   const useState: typeof import('../src/composables/useState').useState
   const useTemplateRef: typeof import('vue').useTemplateRef
+  const useToast: typeof import('../src/composables/useUtils').useToast
   const watch: typeof import('vue').watch
   const watchEffect: typeof import('vue').watchEffect
   const watchPostEffect: typeof import('vue').watchPostEffect
@@ -85,4 +89,7 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { PlayTypeEnum, SortEnum } from '../src/enums/type'
+  import('../src/enums/type')
 }

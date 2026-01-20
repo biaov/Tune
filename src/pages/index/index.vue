@@ -9,18 +9,9 @@
           </view>
         </view>
       </view>
-      <view class="header-tabs">
-        <view class="item" :class="{ active: formState.activeTabIndex === index }" v-for="(item, index) in tabs" :key="index" @click="onClickTab(index)">
-          {{ item.label }}
-        </view>
-      </view>
     </view>
-    <view class="container" style="--header-height: calc(var(--status-bar-height) + 220rpx)">
-      <t-tabs v-model="formState.activeTabIndex">
-        <t-tab-pane :tab="item.value" v-for="(item, index) in tabs" :key="index">
-          <component :is="item.component" />
-        </t-tab-pane>
-      </t-tabs>
+    <view class="container">
+      <pane-song />
     </view>
     <t-dropdown v-model:visible="sortVisible" @ok="onSortSubmit">
       <view class="dropdown-sort">
@@ -40,25 +31,20 @@
         </radio-group>
       </view>
     </t-dropdown>
+    <float-play />
   </t-page>
 </template>
 
 <script setup lang="ts">
-import { useMenu, useSortModal, useTabs } from './hooks'
-import { SortEnum } from './enums'
-import type { FormStateType } from './types.d'
-
-const formState = reactive<FormStateType>({
-  sort: SortEnum.createDesc,
-  activeTabIndex: 0
-})
+import PaneSong from './components/pane-song.vue'
+import FloatPlay from './components/float-play.vue'
+import { useMenu, useSortModal } from './hooks'
 
 const { currentSortValue, sortList, onSortChange } = useSortModal()
-const { menu, onClickItem, sortVisible, setSortVisible } = useMenu({ formState, currentSortValue })
-const { tabs, onClickTab } = useTabs({ formState })
+const { menu, onClickItem, sortVisible, setSortVisible } = useMenu({ currentSortValue })
 
 const onSortSubmit = () => {
-  formState.sort = currentSortValue.value
+  songStore.onUpdateSortType(currentSortValue.value)
   setSortVisible(false)
 }
 </script>

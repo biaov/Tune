@@ -42,10 +42,10 @@ const onClick = () => {
   font-size: 26rpx;
 
   &--default {
-    border-color: #000;
-    color: #000;
+    border-color: var(--theme-primary);
+    color: var(--theme-primary);
     &:active {
-      background: rgba(0, 0, 0, 0.02);
+      background: var(--bg-active);
     }
   }
   &--primary {
@@ -58,9 +58,9 @@ const onClick = () => {
   }
   &--info {
     border-color: rgba(0, 0, 0, 0.1);
-    color: #999;
+    color: var(--color-text-2);
     &:active {
-      background: rgba(0, 0, 0, 0.02);
+      background: var(--bg-active);
     }
   }
 }
