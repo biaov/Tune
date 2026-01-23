@@ -17,17 +17,20 @@ const props = withDefaults(
     name: string
     mode?: ImageMode
     ext?: string
+    rotate?: number
   }>(),
   {
     height: '100%',
     mode: 'widthFix',
-    ext: '.svg'
+    ext: '.svg',
+    rotate: 0
   }
 )
 const getStyle = computed(() => ({
   '--width': props.width,
   '--height': props.height,
-  '--image-size': props.iconSize
+  '--image-size': props.iconSize,
+  '--rotate': `rotate(${props.rotate}deg)`
 }))
 const onClick = (e: Event) => {
   emit('click', e)
@@ -48,6 +51,7 @@ const onClick = (e: Event) => {
   .image {
     width: var(--image-size);
     height: var(--image-size);
+    transform: var(--rotate);
   }
 }
 </style>

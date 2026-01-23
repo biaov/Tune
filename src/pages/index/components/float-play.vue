@@ -8,8 +8,8 @@
         <view class="truncate" v-if="item.name">{{ item.name }}</view>
         <view class="artist truncate" v-if="item.artist">{{ item.artist }}</view>
       </view>
-      <t-icon :name="songStore.state.isPlay ? 'pause' : 'play_fill'" width="80rpx" height="80rpx" icon-size="30rpx" class="icon" @click.stop="songStore.onUpdatePlay" />
-      <t-icon name="next" width="80rpx" height="80rpx" icon-size="30rpx" class="icon" @click.stop="songStore.onNextSong" />
+      <t-icon :name="songStore.state.isPlay ? 'pause' : 'play'" width="80rpx" height="80rpx" icon-size="30rpx" class="icon" @click.stop="songStore.onTogglePlay()" />
+      <t-icon name="next" width="80rpx" height="80rpx" icon-size="30rpx" class="icon" @click.stop="songStore.onPlayPrevNext(1)" />
     </view>
   </view>
 </template>
@@ -40,10 +40,14 @@ const onDetail = () => {
   bottom: var(--ios-bottom-height);
   left: 0;
   width: 100%;
+  height: 120rpx;
   background: #fff;
-  padding: 20rpx 30rpx;
+  padding: 0 30rpx;
+  box-shadow: var(--box-shadow);
   .item {
     display: flex;
+    height: 100%;
+    align-items: center;
     .image {
       @size: 80rpx;
       position: relative;

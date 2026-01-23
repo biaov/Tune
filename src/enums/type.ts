@@ -11,7 +11,7 @@ export enum PlayTypeEnum {
    */
   random = 'random',
   /**
-   * 循环播放
+   * 单曲循环
    */
   loop = 'loop'
 }
@@ -44,4 +44,22 @@ export enum SortEnum {
    * 按创建时间倒序
    */
   createDesc = 'create-desc'
+}
+
+/**
+ * 播放按钮枚举
+ */
+export enum PlayButtonEnum {
+  /**
+   * 上一曲
+   */
+  prev = 'prev',
+  /**
+   * 播放/暂停
+   */
+  play = 'play',
+  /**
+   * 下一曲
+   */
+  next = 'next'
 }

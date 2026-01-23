@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const PlayButtonEnum: typeof import('../src/enums/type').PlayButtonEnum
   const PlayTypeEnum: typeof import('../src/enums/type').PlayTypeEnum
   const SortEnum: typeof import('../src/enums/type').SortEnum
   const computed: typeof import('vue').computed
@@ -51,6 +52,7 @@ declare global {
   const onShow: typeof import('@dcloudio/uni-app').onShow
   const onUnload: typeof import('@dcloudio/uni-app').onUnload
   const onUnmounted: typeof import('vue').onUnmounted
+  const onUpdatePlayType: typeof import('../src/store/song').onUpdatePlayType
   const onUpdated: typeof import('vue').onUpdated
   const onWatcherCleanup: typeof import('vue').onWatcherCleanup
   const provide: typeof import('vue').provide
@@ -71,13 +73,19 @@ declare global {
   const triggerRef: typeof import('vue').triggerRef
   const unref: typeof import('vue').unref
   const useAttrs: typeof import('vue').useAttrs
+  const useAud: typeof import('../src/composables/useAudio').useAud
+  const useAudio: typeof import('../src/composables/useAudio').useAudio
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('../src/composables/useCssVars').useCssVars
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
+  const useSecToShow: typeof import('../src/composables/useUtils').useSecToShow
+  const useSecondToShow: typeof import('../src/composables/useUtils').useSecondToShow
+  const useSecondToTime: typeof import('../src/composables/useUtils').useSecondToTime
   const useSlots: typeof import('vue').useSlots
   const useState: typeof import('../src/composables/useState').useState
   const useTemplateRef: typeof import('vue').useTemplateRef
+  const useTimeToShow: typeof import('../src/composables/useUtils').useTimeToShow
   const useToast: typeof import('../src/composables/useUtils').useToast
   const watch: typeof import('vue').watch
   const watchEffect: typeof import('vue').watchEffect
@@ -90,6 +98,6 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { PlayTypeEnum, SortEnum } from '../src/enums/type'
+  export type { PlayTypeEnum, SortEnum, PlayButtonEnum } from '../src/enums/type'
   import('../src/enums/type')
 }

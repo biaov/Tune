@@ -11,13 +11,6 @@
       }
     },
     {
-      "path": "pages/mine/index",
-      "style": {
-        "navigationBarTitleText": "设置",
-        "navigationStyle": "default"
-      }
-    },
-    {
       "path": "pages/search/index",
       "style": {
         "navigationBarTitleText": "搜索",
@@ -25,11 +18,32 @@
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "pages/mine",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "设置",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "scan-file",
+          "style": {
+            "navigationBarTitleText": "音乐源",
+            "navigationStyle": "default"
+          }
+        }
+      ]
+    }
+  ],
   "globalStyle": {
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Tune",
-    "navigationBarBackgroundColor": "#f1f5ff",
-    "backgroundColor": "#f1f5ff"
+    "navigationBarBackgroundColor": "#f1f5ff00",
+    "backgroundColor": "#f1f5ff00"
   }
 }

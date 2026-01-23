@@ -3,9 +3,9 @@
     <input type="text" v-model="keyword" placeholder="请输入歌曲名称" class="search__input" />
     <scroll-view scroll-y class="scroll-view" v-if="list.length">
       <view class="count">共 {{ list.length }} 首歌曲</view>
-      <view class="list w-full">
+      <view class="w-full">
         <t-song-item v-for="(item, index) in list" :key="index" :item="item" @click="onClickItem(item)" />
-        <view class="placeholder">~~ 没有更多啦 ~~</view>
+        <t-no-more />
       </view>
     </scroll-view>
   </view>
@@ -49,15 +49,6 @@ const onClickItem = (item: SongItemType) => {
       position: sticky;
       font-weight: bold;
       margin-bottom: 20rpx;
-    }
-    .list {
-      .placeholder {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-bottom: 50rpx;
-        color: rgba(0, 0, 0, 0.3);
-      }
     }
   }
 }

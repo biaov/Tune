@@ -22,11 +22,12 @@
         <view class="border"></view>
       </template>
     </view>
-    <t-button type="info">开始扫描</t-button>
+    <t-button type="info" @click="songStore.onScan">开始扫描</t-button>
   </view>
 </template>
 <script lang="ts" setup>
 import { settingStore } from '@/store/setting'
+import { songStore } from '@/store/song'
 
 const tabs = [
   {
@@ -38,6 +39,8 @@ const tabs = [
     tips: '加载所有文件夹，较慢'
   }
 ]
+
+
 </script>
 <style scoped lang="less">
 .t-scan-file {

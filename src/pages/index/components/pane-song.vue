@@ -1,9 +1,9 @@
 <template>
   <view class="pane-song" v-if="list.length">
     <view class="count">{{ list.length }} 首歌曲</view>
-    <view class="list w-full">
+    <view class="w-full">
       <t-song-item v-for="(item, index) in list" :key="index" :item="item" :active="songStore.state.playId === item.id" more @click="onClickPlay(item)" @click-mor="onMoreClick(item)" />
-      <view class="placeholder">~~ 没有更多啦 ~~</view>
+      <t-no-more />
     </view>
   </view>
   <t-scan-file v-else />
@@ -87,15 +87,6 @@ const onModalItem = (item: (typeof modalList)[0]) => {
     position: sticky;
     font-weight: bold;
     margin-bottom: 20rpx;
-  }
-  .list {
-    .placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 50rpx;
-      color: rgba(0, 0, 0, 0.3);
-    }
   }
 }
 .modal-title {

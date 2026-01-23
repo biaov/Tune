@@ -1,1 +1,13 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1768814748033" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6730" width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M304 176h80v672h-80zM712 176h-64c-4.4 0-8 3.6-8 8v656c0 4.4 3.6 8 8 8h64c4.4 0 8-3.6 8-8V184c0-4.4-3.6-8-8-8z" p-id="6731" fill="#000000"></path></svg>
+<svg
+  version="1.1"
+  id="图层_1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  x="0px"
+  y="0px"
+  viewBox="0 0 16 16"
+  style="enable-background: new 0 0 16 16"
+  xml:space="preserve"
+>
+  <path d="M6.9,13.7V2.3H3.5v11.3H6.9z M12.5,13.7V2.3H9.1v11.3H12.5z" />
+</svg>

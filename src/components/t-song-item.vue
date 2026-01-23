@@ -8,6 +8,7 @@
       <view class="truncate">{{ item.name }}</view>
       <view class="artist truncate">{{ item.artist }}</view>
     </view>
+    <slot></slot>
     <t-icon name="more" width="80rpx" height="100rpx" icon-size="30rpx" class="icon" @click.stop="emit('click-more')" v-if="more" />
   </view>
 </template>
@@ -33,6 +34,7 @@ const props = withDefaults(
 <style scoped lang="less">
 .t-song-item {
   display: flex;
+  align-items: center;
   gap: 20rpx;
   margin-bottom: 30rpx;
   .image {
