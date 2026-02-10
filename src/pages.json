@@ -43,7 +43,7 @@
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Tune",
-    "navigationBarBackgroundColor": "#f1f5ff00",
-    "backgroundColor": "#f1f5ff00"
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff"
   }
 }

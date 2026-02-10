@@ -27,8 +27,9 @@
 import { songStore } from '@/store/song'
 import { ModalButtonType } from '../enums'
 
-const list = computed(() =>
-  songStore.state.songs.toSorted((a, b) => {
+const list = computed(() => {
+  const songs = JSON.parse(JSON.stringify([...songStore.state.songs])) as SongItemType[]
+  songs.sort((a, b) => {
     switch (songStore.state.sortType) {
       case SortEnum.nameAsc:
         return a.name.localeCompare(b.name, 'zh-CN')
@@ -44,7 +45,8 @@ const list = computed(() =>
         return dayjs(b.createdTime) - dayjs(a.createdTime)
     }
   })
-)
+  return songs
+})
 const moreItem = ref<SongItemType | null>(null)
 const onClickPlay = (item: SongItemType) => {
   songStore.onUpdatePlayId(item.id)

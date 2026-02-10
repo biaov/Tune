@@ -29,6 +29,7 @@ const onOk = () => {
 }
 const instance = getCurrentInstance()
 onMounted(() => {
+  if (!document) return
   document.querySelector('.t-page')!.appendChild(instance!.proxy!.$el)
 })
 </script>

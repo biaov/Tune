@@ -10,6 +10,7 @@ declare global {
   const PlayButtonEnum: typeof import('../src/enums/type').PlayButtonEnum
   const PlayTypeEnum: typeof import('../src/enums/type').PlayTypeEnum
   const SortEnum: typeof import('../src/enums/type').SortEnum
+  const StorageKeyEnum: typeof import('../src/enums/storage').StorageKeyEnum
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
   const customRef: typeof import('vue').customRef
@@ -20,6 +21,7 @@ declare global {
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
+  const getStorage: typeof import('../src/composables/useStorage').getStorage
   const h: typeof import('vue').h
   const inject: typeof import('vue').inject
   const isProxy: typeof import('vue').isProxy
@@ -27,6 +29,7 @@ declare global {
   const isReadonly: typeof import('vue').isReadonly
   const isRef: typeof import('vue').isRef
   const isShallow: typeof import('vue').isShallow
+  const jsmediatagsMin: typeof import('../src/composables/jsmediatags.min.js').default
   const markRaw: typeof import('vue').markRaw
   const nextTick: typeof import('vue').nextTick
   const onActivated: typeof import('vue').onActivated
@@ -57,9 +60,14 @@ declare global {
   const onWatcherCleanup: typeof import('vue').onWatcherCleanup
   const provide: typeof import('vue').provide
   const reactive: typeof import('vue').reactive
+  const readAudio: typeof import('../src/composables/demo').readAudio
+  const readAudios: typeof import('../src/composables/demo').readAudios
   const readonly: typeof import('vue').readonly
   const ref: typeof import('vue').ref
+  const removeStorage: typeof import('../src/composables/useStorage').removeStorage
   const resolveComponent: typeof import('vue').resolveComponent
+  const scanAndroidDir: typeof import('../src/store/androidFile').scanAndroidDir
+  const setStorage: typeof import('../src/composables/useStorage').setStorage
   const settingStore: typeof import('../src/store/setting').settingStore
   const settingStoreState: typeof import('../src/store/setting').settingStoreState
   const shallowReactive: typeof import('vue').shallowReactive
@@ -79,6 +87,8 @@ declare global {
   const useCssVars: typeof import('../src/composables/useCssVars').useCssVars
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
+  const useScanAndroidDir: typeof import('../src/store/androidFile').useScanAndroidDir
+  const useScanDir: typeof import('../src/composables/useScanDir').useScanDir
   const useSecToShow: typeof import('../src/composables/useUtils').useSecToShow
   const useSecondToShow: typeof import('../src/composables/useUtils').useSecondToShow
   const useSecondToTime: typeof import('../src/composables/useUtils').useSecondToTime
@@ -97,6 +107,9 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { StorageKeyEnum } from '../src/enums/storage'
+  import('../src/enums/storage')
   // @ts-ignore
   export type { PlayTypeEnum, SortEnum, PlayButtonEnum } from '../src/enums/type'
   import('../src/enums/type')

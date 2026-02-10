@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "一个简单的本地音乐播放器 👍",
   "scripts": {
-    "start": "npm run dev:h5",
+    "start": "npm run dev:app",
     "dev:app": "uni -p app-plus",
     "dev:h5": "uni",
     "build:app": "uni build -p app-plus",
@@ -23,6 +23,7 @@
     "@dcloudio/uni-components": "^3.0.0-alpha-5000020260104004",
     "@dcloudio/uni-h5": "^3.0.0-alpha-5000020260104004",
     "dayjs": "^1.11.19",
+    "id3-parser": "^3.0.0",
     "vue": "^3.5.26",
     "vue-i18n": "^11.2.8"
   },

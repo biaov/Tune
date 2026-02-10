@@ -3,7 +3,7 @@
     <view class="deail">
       <play-rotate :src="songStore.playItem.value!.url" :open="songStore.state.isPlay" />
       <scroll-view scroll-y class="scroll-view"></scroll-view>
-      <play-progress :current="songStore.currentSecond.value" :total="songStore.totalSecond.value" :progress="songStore.state.progress" @update:model-value="songStore.onUpdateProgress" />
+      <play-progress :current="songStore.currentSecond.value" :total="songStore.duration.value" :progress="songStore.state.progress" @update:model-value="songStore.onUpdateProgress" />
       <play-button :play="songStore.state.isPlay" @click="onClickButton" />
       <view class="flex justify-between w-full">
         <t-icon :name="playTypeIcon" width="100rpx" height="100rpx" icon-size="34rpx" @click="onClickPlayType" />
@@ -85,7 +85,7 @@ const onClickMore = () => {
   }
   setVisibleModal(true)
 }
-const onRemove = (id: number) => {
+const onRemove = (id: string) => {
   songStore.removeSong(id)
   id === songStore.state.playId && songStore.onPlayPrevNext(1)
 }

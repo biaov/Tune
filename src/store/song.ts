@@ -2,19 +2,11 @@ const songState = reactive({
   /**
    * 歌曲列表
    */
-  songs: Array.from({ length: 20 }, (_, index) => ({
-    id: index + 1,
-    name: `歌曲${index + 1}`,
-    artist: `歌手${index + 1}`,
-    url: `https://dummyimage.com/100x100/f60&text=歌曲${index + 1}`,
-    audio: `https://dummyimage.com/100x100/f60&text=歌曲${index + 1}`,
-    createdTime: dayjs().subtract(index, 'day').format('YYYY-MM-DD HH:mm:ss'),
-    totalSecond: ~~(Math.random() * 300)
-  })),
+  songs: getStorage<SongItemType[]>(StorageKeyEnum.songState, []),
   /**
    * 当前播放的歌曲 id
    */
-  playId: 1,
+  playId: '',
   /**
    * 是否正在播放
    */
@@ -33,33 +25,44 @@ const songState = reactive({
   progress: 0
 })
 
-const onUpdatePlayId = (id: number, isPlay = true) => {
+watch(
+  () => songState.songs,
+  value => {
+    setStorage(StorageKeyEnum.songState, value)
+  },
+  { immediate: true }
+)
+
+const onUpdatePlayId = (id: string, isPlay = true) => {
   songState.playId = id
   songState.isPlay = isPlay
 }
 
-const removeSong = (id: number) => {
+const removeSong = (id: string) => {
   songState.songs = songState.songs.filter(item => item.id !== id)
 }
 
 const playItem = computed(() => songState.songs.find(item => item.id === songState.playId))
 
-const artistList = computed(() => songState.songs.toSorted((a, b) => a.artist.localeCompare(b.artist, 'zh-CN')))
-
 const onUpdateSortType = (type: SortEnum) => {
   songState.sortType = type
 }
 
-const onScan = () => {
+const onScan = async () => {
   uni.showLoading({ title: '扫描中...' })
-  setTimeout(() => {
+  try {
+    const res = await useScanDir()
+    songState.songs = res
+  } catch (error) {
+    console.log(error, '--error')
+  } finally {
     uni.hideLoading()
     useToast('扫描完成')
-  }, 3000)
+  }
 }
 
-const totalSecond = computed(() => playItem.value?.totalSecond || 0)
-const currentSecond = computed(() => ~~((songState.progress * totalSecond.value) / 100) || 0)
+const duration = computed(() => playItem.value?.duration || 0)
+const currentSecond = computed(() => ~~((songState.progress * duration.value) / 100) || 0)
 
 const onUpdateProgress = (progress: number) => {
   songState.progress = progress
@@ -115,9 +118,17 @@ const onUpdatePlayType = (type: PlayTypeEnum) => {
   songState.playType = type
 }
 
+/**
+ * 更新播放进度
+ */
+const onUpdateDuration = ({ currentTime, duration }: { currentTime: number; duration: number }) => {
+  songState.progress = ~~((currentTime / duration) * 100)
+  if (playItem.value?.duration) return
+  songState.songs.find(item => item.id === songState.playId)!.duration = duration
+}
+
 export const songStore = {
   state: readonly(songState),
-  artistList: readonly(artistList),
   onUpdatePlayId,
   removeSong,
   playItem,
@@ -125,8 +136,9 @@ export const songStore = {
   onScan,
   onUpdateProgress,
   currentSecond,
-  totalSecond,
+  duration,
   onTogglePlay,
   onPlayPrevNext,
-  onUpdatePlayType
+  onUpdatePlayType,
+  onUpdateDuration
 }
