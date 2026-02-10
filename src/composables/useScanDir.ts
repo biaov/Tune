@@ -70,7 +70,10 @@ const useReadyAudio = async (
   })
 }
 
-const scanAndroidDir = (dirPath: string): Promise<SongItemType[]> => {
+/**
+ * 扫描目录
+ */
+export const useScanAndroidDir = (dirPath: string): Promise<SongItemType[]> => {
   const preset: SongItemType[] = []
   return new Promise(async resolve => {
     plus.io.resolveLocalFileSystemURL(dirPath, entry => {
@@ -81,15 +84,13 @@ const scanAndroidDir = (dirPath: string): Promise<SongItemType[]> => {
           const taskPromie = (entries as unknown as PlusIoDirectoryEntry[]).map(async entry => {
             // 递归子目录
             if (entry.isDirectory) {
-              const result = await scanAndroidDir(entry.fullPath!)
+              const result = await useScanAndroidDir(entry.fullPath!)
               preset.push(...result)
               return
             }
 
             if (entry.isFile) {
-              if (entry.fullPath) {
-                return
-              }
+              if (songStore.state.songs.some(item => item.audio === entry.fullPath)) return
               const name = entry.name!
               const nameLower = name.toLowerCase()
               if (!nameLower.endsWith('.mp3')) return
@@ -159,8 +160,8 @@ export const useScanDir = (): Promise<SongItemType[]> => {
           })
           return
         }
-        // 读取目录
-        scanAndroidDir('/storage/emulated/0/').then(resolve)
+        // // 读取目录
+        useScanAndroidDir('/storage/emulated/0/Music').then(resolve)
       },
       () => {
         uni.showModal({ title: '提示', content: '权限申请失败', showCancel: false })

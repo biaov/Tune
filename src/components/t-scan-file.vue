@@ -11,7 +11,7 @@
       <template v-if="!settingStore.state.scanTabIndex">
         <view class="head">
           <view class="head__label">要加载的文件夹</view>
-          <t-icon name="plus" width="80rpx" height="80rpx" icon-size="30rpx" />
+          <t-icon name="plus" width="80rpx" height="80rpx" icon-size="30rpx" @click="settingStore.addDirList" />
         </view>
         <view class="dir-list">
           <view class="item" v-for="(item, index) in settingStore.state.dirList" :key="index">

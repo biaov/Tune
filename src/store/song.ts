@@ -52,6 +52,7 @@ const onScan = async () => {
   uni.showLoading({ title: '扫描中...' })
   try {
     const res = await useScanDir()
+    console.log(res, '--res')
     songState.songs = res
   } catch (error) {
     console.log(error, '--error')
