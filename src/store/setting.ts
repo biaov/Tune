@@ -13,9 +13,6 @@ const updateScanTabIndex = (index: number) => {
 const removeDirList = (index: number) => {
   settingState.dirList.splice(index, 1)
 }
-uni.onActivityResult = function (res) {
-  console.log(res, '--res')
-}
 const addDirList = () => {
   plus.android.requestPermissions(['android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE'], result => {
     // 获取当前 Activity

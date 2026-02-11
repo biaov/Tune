@@ -11,7 +11,7 @@ export const useAudio = () => {
     bgAudioManager.title = songStore.playItem.value.name
     bgAudioManager.singer = songStore.playItem.value.artist
     bgAudioManager.coverImgUrl = songStore.playItem.value.url
-
+    console.log(songStore.playItem.value.audio)
     // 设置音频源（可动态修改）
     bgAudioManager.src = songStore.playItem.value.audio
 
@@ -54,12 +54,14 @@ export const useAudio = () => {
       initAudio()
       if (!bgAudioManager) return
       if (bool) {
-        bgAudioManager.pause()
-      } else {
+        bgAudioManager.seek(songStore.state.currentTime)
         bgAudioManager.play()
+      } else {
+        bgAudioManager.pause()
       }
     },
     { immediate: true }
   )
-
 }
+
+// const p = plus.audio.createPlayer(playItem.value.url)

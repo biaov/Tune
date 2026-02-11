@@ -1,5 +1,5 @@
 <template>
-  <view class="play-progress" @touchstart="onTouchMove" @touchmove="onTouchMove" @touchend="onTouchEnd">
+  <view class="play-progress" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
     <view class="content">
       <view class="tips" v-if="isShowTips">{{ currentProgressTips }}</view>
       <view class="progress">
@@ -45,6 +45,12 @@ const calcProgress = (x: number) => {
   return +curProgress.toFixed(2)
 }
 const isShowTips = ref(false)
+
+const onTouchStart = (e: TouchEvent) => {
+  if (!e.changedTouches.length) return
+  onTouchMove(e)
+  songStore.onTogglePlay(false)
+}
 const onTouchMove = (e: TouchEvent) => {
   if (!e.changedTouches.length) return
   progress.value = calcProgress(e.changedTouches[0]!.clientX)
@@ -55,6 +61,7 @@ const onTouchEnd = (e: TouchEvent) => {
   progress.value = calcProgress(e.changedTouches[0]!.clientX)
   progressModel.value = progress.value
   isShowTips.value = false
+  songStore.onTogglePlay(true)
 }
 </script>
 
@@ -116,5 +123,4 @@ const onTouchEnd = (e: TouchEvent) => {
     color: var(--color-text-2);
   }
 }
-
 </style>

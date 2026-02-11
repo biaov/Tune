@@ -1,10 +1,10 @@
 <template>
   <view class="float-play">
-    <view class="item" @click="onDetail">
-      <view class="image shrink-0">
+    <view class="item">
+      <view class="image shrink-0" @click="onDetail">
         <image :src="item.url" class="w-full h-full" mode="aspectFill" />
       </view>
-      <view class="info">
+      <view class="info" @click="onDetail">
         <view class="truncate" v-if="item.name">{{ item.name }}</view>
         <view class="artist truncate" v-if="item.artist">{{ item.artist }}</view>
       </view>

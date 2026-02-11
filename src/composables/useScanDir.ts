@@ -109,7 +109,6 @@ export const useScanAndroidDir = (dirPath: string): Promise<SongItemType[]> => {
           })
           await Promise.all(taskPromie)
           resolve(preset)
-          // p = plus.audio.createPlayer( "_Doc/Audio/test.mp3")
         },
         useToast.bind(null, '读取失败')
       )
@@ -161,7 +160,7 @@ export const useScanDir = (): Promise<SongItemType[]> => {
           return
         }
         // // 读取目录
-        useScanAndroidDir('/storage/emulated/0/Music').then(resolve)
+        useScanAndroidDir('/storage/emulated/0/').then(resolve)
       },
       () => {
         uni.showModal({ title: '提示', content: '权限申请失败', showCancel: false })

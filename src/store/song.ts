@@ -20,9 +20,9 @@ const songState = reactive({
    */
   sortType: SortEnum.createDesc,
   /**
-   * 当前播放进度, 0 - 100
+   * 当前播放时间
    */
-  progress: 0
+  currentTime: 0
 })
 
 watch(
@@ -52,7 +52,6 @@ const onScan = async () => {
   uni.showLoading({ title: '扫描中...' })
   try {
     const res = await useScanDir()
-    console.log(res, '--res')
     songState.songs = res
   } catch (error) {
     console.log(error, '--error')
@@ -63,16 +62,17 @@ const onScan = async () => {
 }
 
 const duration = computed(() => playItem.value?.duration || 0)
-const currentSecond = computed(() => ~~((songState.progress * duration.value) / 100) || 0)
+const progress = computed(() => +((songState.currentTime / duration.value) * 100).toFixed(2))
+const currentSecond = computed(() => ~~(songState.currentTime / 100) || 0)
 
-const onUpdateProgress = (progress: number) => {
-  songState.progress = progress
+const onUpdateProgress = (newProgress: number) => {
+  songState.currentTime = Math.round((newProgress / 100) * duration.value)
 }
 
 /**
  * 切换播放暂停
  */
-const onTogglePlay = (isForcePlay = false) => {
+const onTogglePlay = (value?: boolean) => {
   if (!songStore.state.songs.length) {
     useToast('请先添加歌曲')
     return
@@ -81,12 +81,7 @@ const onTogglePlay = (isForcePlay = false) => {
     useToast('请先选择要播放的歌曲')
     return
   }
-  if (isForcePlay) {
-    songState.isPlay = true
-    return
-  }
-
-  songState.isPlay = !songState.isPlay
+  songState.isPlay = value ?? !songState.isPlay
 }
 /**
  * 播放下一首
@@ -96,6 +91,8 @@ const onPlayPrevNext = (value: 1 | -1) => {
     useToast('请先添加歌曲')
     return
   }
+  onTogglePlay(false)
+  songState.currentTime = 0
   let index = 0
   if (songState.playType === PlayTypeEnum.random) {
     index = ~~(Math.random() * songState.songs.length)
@@ -108,8 +105,7 @@ const onPlayPrevNext = (value: 1 | -1) => {
     }
   }
 
-  onUpdatePlayId(songState.songs[index]!.id)
-  onTogglePlay(true)
+  // onUpdatePlayId(songState.songs[index]!.id)
 }
 
 /**
@@ -123,7 +119,7 @@ const onUpdatePlayType = (type: PlayTypeEnum) => {
  * 更新播放进度
  */
 const onUpdateDuration = ({ currentTime, duration }: { currentTime: number; duration: number }) => {
-  songState.progress = ~~((currentTime / duration) * 100)
+  songState.currentTime = currentTime
   if (playItem.value?.duration) return
   songState.songs.find(item => item.id === songState.playId)!.duration = duration
 }
@@ -138,6 +134,7 @@ export const songStore = {
   onUpdateProgress,
   currentSecond,
   duration,
+  progress,
   onTogglePlay,
   onPlayPrevNext,
   onUpdatePlayType,
