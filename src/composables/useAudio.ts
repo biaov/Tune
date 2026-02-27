@@ -41,10 +41,13 @@ export const useAudio = () => {
       if (!bgAudioManager) return
       const currentTime = ~~bgAudioManager.currentTime
       const duration = ~~bgAudioManager.duration
+      console.log({ currentTime, duration })
       songStore.onUpdateDuration({ currentTime, duration })
     })
 
     bgAudioManager.onError(err => {
+      if (!bgAudioManager) return
+      songStore.onTogglePlay(false)
       bgAudioManager = null
       console.error('音频错误', err)
       useToast('播放失败')
@@ -67,5 +70,3 @@ export const useAudio = () => {
     { immediate: true }
   )
 }
-
-// const p = plus.audio.createPlayer(playItem.value.url)

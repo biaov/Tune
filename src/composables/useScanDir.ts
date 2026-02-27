@@ -11,15 +11,15 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
     const audioUri = mediaStore.Audio.Media.EXTERNAL_CONTENT_URI
     // 投影列（要查询的字段）
     const projection = [
-      mediaStore.Audio.Media._ID,
-      mediaStore.Audio.Media.DISPLAY_NAME,
-      mediaStore.Audio.Media.TITLE,
-      mediaStore.Audio.Media.ARTIST,
-      mediaStore.Audio.Media.ALBUM,
-      mediaStore.Audio.Media.ALBUM_ID,
-      mediaStore.Audio.Media.DATA,
-      mediaStore.Audio.Media.DURATION,
-      mediaStore.Audio.Media.SIZE
+      mediaStore.Audio.Media._ID, // 音频 ID
+      mediaStore.Audio.Media.DISPLAY_NAME, // 显示名称（文件名）
+      mediaStore.Audio.Media.TITLE, // 标题（可空）
+      mediaStore.Audio.Media.ARTIST, // 艺术家（可空）
+      mediaStore.Audio.Media.ALBUM, // 专辑（可空）
+      mediaStore.Audio.Media.ALBUM_ID, // 专辑 ID（可空）
+      mediaStore.Audio.Media.DATA, // 音频文件路径
+      mediaStore.Audio.Media.DURATION, // 持续时间（毫秒）
+      mediaStore.Audio.Media.SIZE // 文件大小（字节）
     ]
     // 可选：过滤只查询音乐（非铃声/通知音等），IS_MUSIC=1
     const selection = `${mediaStore.Audio.Media.IS_MUSIC} = 1`
