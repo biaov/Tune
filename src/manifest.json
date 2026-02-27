@@ -32,6 +32,10 @@
         "mp3": {
           "description": "Android平台录音支持MP3格式文件"
         }
+      },
+      "webview": {
+        "allowFileAccessFromFileURLs": true,
+        "allowUniversalAccessFromFileURLs": true
       }
     },
     /* 应用发布信息 */
@@ -46,7 +50,9 @@
           /* 读取外部存储权限 */
           "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>",
           /* 写入外部存储权限 */
-          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>"
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+          /* 读取音频权限 */
+          "<uses-permission android:name=\"android.permission.READ_MEDIA_AUDIO\"/>"
         ],
         "minSdkVersion": 30,
         "targetSdkVersion": 30,

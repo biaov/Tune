@@ -2,7 +2,7 @@
   <view class="pane-song" v-if="list.length">
     <view class="count">{{ list.length }} 首歌曲</view>
     <view class="w-full">
-      <t-song-item v-for="(item, index) in list" :key="index" :item="item" :active="songStore.state.playId === item.id" more @click="onClickPlay(item)" @click-mor="onMoreClick(item)" />
+      <t-song-item v-for="(item, index) in list" :key="index" :item="item" :active="songStore.state.playId === item.id" more @click="onClickPlay(item)" @click-more="onMoreClick(item)" />
       <t-no-more />
     </view>
   </view>

@@ -87,7 +87,10 @@ declare global {
   const useCssVars: typeof import('../src/composables/useCssVars').useCssVars
   const useId: typeof import('vue').useId
   const useModel: typeof import('vue').useModel
+  const useSca: typeof import('../src/composables/useScanDir').useSca
+  const useScan: typeof import('../src/composables/useScanDir').useScan
   const useScanAndroidDir: typeof import('../src/composables/useScanDir').useScanAndroidDir
+  const useScanAndroidDirs: typeof import('../src/composables/useScanDir').useScanAndroidDirs
   const useScanDir: typeof import('../src/composables/useScanDir').useScanDir
   const useSecToShow: typeof import('../src/composables/useUtils').useSecToShow
   const useSecondToShow: typeof import('../src/composables/useUtils').useSecondToShow

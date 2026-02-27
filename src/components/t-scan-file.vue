@@ -1,7 +1,7 @@
 <template>
   <view class="t-scan-file">
     <view class="title">音乐源</view>
-    <view class="tabs">
+    <!-- <view class="tabs">
       <view class="item" :class="{ active: settingStore.state.scanTabIndex === index }" v-for="(item, index) in tabs" :key="index" @click="settingStore.updateScanTabIndex(index)">
         {{ item.label }}
       </view>
@@ -21,7 +21,7 @@
         </view>
         <view class="border"></view>
       </template>
-    </view>
+    </view> -->
     <t-button type="info" @click="songStore.onScan">开始扫描</t-button>
   </view>
 </template>
@@ -39,8 +39,6 @@ const tabs = [
     tips: '加载所有文件夹，较慢'
   }
 ]
-
-
 </script>
 <style scoped lang="less">
 .t-scan-file {
@@ -49,7 +47,7 @@ const tabs = [
   .title {
     font-size: 30rpx;
     font-weight: bold;
-    margin-bottom: 20rpx;
+    margin-bottom: 120rpx;
   }
   .tabs {
     display: flex;
