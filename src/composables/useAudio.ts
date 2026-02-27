@@ -1,19 +1,23 @@
 /**
+ * 当前播放的音频 id
+ */
+let currentPlayId: string = ''
+
+/**
  * 音频播放
  */
 export const useAudio = () => {
   const playState = computed(() => songStore.state.isPlay)
   let bgAudioManager: UniApp.BackgroundAudioManager | null = null
   const initAudio = () => {
-    if (bgAudioManager) return // 避免重复初始化
     if (!songStore.playItem.value) return
+    if (bgAudioManager && currentPlayId === songStore.playItem.value.id) return // 避免重复初始化
+    currentPlayId = songStore.playItem.value.id
     bgAudioManager = uni.getBackgroundAudioManager()
     bgAudioManager.title = songStore.playItem.value.name
     bgAudioManager.singer = songStore.playItem.value.artist
-    bgAudioManager.coverImgUrl = songStore.playItem.value.url
-    console.log(songStore.playItem.value.audio)
-    // 设置音频源（可动态修改）
     bgAudioManager.src = songStore.playItem.value.audio
+    bgAudioManager.coverImgUrl = songStore.playItem.value.url
 
     bgAudioManager.onPlay(() => {
       console.log('播放中')
