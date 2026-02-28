@@ -14,3 +14,8 @@ export const useSecondToTime = (second: number) => {
   // return `${m}:${s < 10 ? '0' : ''}${s}`
   return `${m}:${s.toString().padStart(2, '0')}`
 }
+
+/**
+ * 获取随机数
+ */
+export const useRandom = (min: number, max: number) => ~~(Math.random() * (max - min + 1) + min)

@@ -1,10 +1,10 @@
 <template>
-  <view class="t-dropdown" :class="`${visibleState.show ? 'show' : ''}`" @click="setVisible(false)" v-if="visibleState.visible">
+  <view class="t-dropdown" :class="`${visible ? 'show' : ''}`" @click="onClose">
     <view class="content" @click.stop>
       <slot></slot>
       <slot name="footer"></slot>
       <view class="footer-button" v-if="!slot.footer">
-        <t-button width="300rpx" type="info" @click="setVisible(false)">取消</t-button>
+        <t-button width="300rpx" type="info" @click="onClose">取消</t-button>
         <t-button width="300rpx" type="primary" @click="onOk">确定</t-button>
       </view>
     </view>
@@ -19,38 +19,19 @@ const slot = defineSlots<{
   footer?: () => void
 }>()
 const visible = defineModel<boolean>('visible', { default: false })
-const visibleState = reactive({
-  visible: false,
-  show: false
-})
-const setVisible = (value: boolean) => {
-  visible.value = value
-}
-const onClose = () => {
-  visibleState.show = false
-  setTimeout(() => {
-    visibleState.visible = false
-  }, 400)
-}
 
-const onOpen = () => {
-  visibleState.visible = true
-  setTimeout(() => {
-    visibleState.show = true
-  }, 100)
+const onClose = () => {
+  visible.value = false
 }
 
 const onOk = () => {
   emit('ok')
 }
-
-watch(
-  visible,
-  value => {
-    value ? onOpen() : onClose()
-  },
-  { immediate: true }
-)
+const instance = getCurrentInstance()
+onMounted(() => {
+  if (!document) return
+  document.querySelector('.t-page')!.appendChild(instance!.proxy!.$el)
+})
 </script>
 <style scoped lang="less">
 .t-dropdown {
@@ -60,8 +41,9 @@ watch(
   z-index: 100;
   width: 100%;
   height: 100%;
+  display: none;
+  transition: all 0.3s allow-discrete;
   background: rgba(#000, 0);
-  transition: all 0.4s;
   .content {
     position: absolute;
     left: 0;
@@ -70,7 +52,7 @@ watch(
     border-radius: 20rpx 20rpx 0 0;
     background: #fff;
     transform: translateY(100%);
-    transition: all 0.4s;
+    transition: all 0.3s;
     .footer-button {
       display: flex;
       justify-content: space-between;
@@ -78,9 +60,18 @@ watch(
     }
   }
   &.show {
+    display: block;
     background: rgba(#000, 0.6);
     .content {
       transform: translateY(0%);
+    }
+  }
+}
+@starting-style {
+  .t-dropdown.show {
+    background: rgba(#000, 0);
+    .content {
+      transform: translateY(100%);
     }
   }
 }

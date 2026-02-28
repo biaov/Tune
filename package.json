@@ -6,6 +6,7 @@
     "start": "npm run dev:app",
     "dev:app": "uni -p app-plus",
     "dev:h5": "uni",
+    "build": "npm run build:app",
     "build:app": "uni build -p app-plus",
     "build:h5": "uni build"
   },

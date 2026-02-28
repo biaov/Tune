@@ -39,6 +39,7 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
     // 移动游标并读取（同样用 invoke 调用 Cursor 方法）
     while (plus.android.invoke(cursor, 'moveToNext')) {
       const id = plus.android.invoke(cursor, 'getLong', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media._ID))
+      const title = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.TITLE))
       const name = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DISPLAY_NAME))
       const artist = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ARTIST))
       const path = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DATA))
@@ -46,9 +47,9 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
       const album = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ALBUM))
       audioList.push({
         id: `${id}`,
-        name,
+        name: title || name,
         artist: artist && artist !== '<unknown>' ? artist : '未知',
-        url: '/static/default-cover.svg',
+        url: `/static/cover/01/${useRandom(1, 10)}.png`, // '/static/default-cover.svg',
         audio: `file://${path}`,
         createdTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         duration: duration / 1000,

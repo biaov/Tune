@@ -20,6 +20,11 @@ const list = [
     name: '重新扫描音乐',
     desc: '重新扫描文件库, 可能需要一些时间',
     key: 'scan'
+  },
+  {
+    name: '清除缓存',
+    desc: '清除缓存, 可能需要一些时间',
+    key: 'clear'
   }
 ]
 const onClick = (item: (typeof list)[0]) => {
@@ -27,6 +32,16 @@ const onClick = (item: (typeof list)[0]) => {
     switch (item.key) {
       case 'scan':
         songStore.onScan()
+        break
+      case 'clear':
+        uni.showModal({
+          title: '提示',
+          content: '你确定要清除缓存吗？这似乎有点危险！',
+          success: res => {
+            if (res.cancel) return
+            songStore.onClearCache()
+          }
+        })
         break
     }
     return

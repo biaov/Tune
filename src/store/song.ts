@@ -1,4 +1,4 @@
-const songState = reactive({
+const initData = () => ({
   /**
    * 歌曲列表
    */
@@ -24,6 +24,7 @@ const songState = reactive({
    */
   currentTime: 0
 })
+const songState = reactive(initData())
 
 watch(
   () => songState.songs,
@@ -49,7 +50,7 @@ const onUpdateSortType = (type: SortEnum) => {
 }
 
 const onScan = async () => {
-  uni.showLoading({ title: '扫描中...' })
+  uni.showLoading({ title: '扫描中...', mask: true })
   try {
     const res = await useScanDir()
     songState.songs = res
@@ -105,7 +106,7 @@ const onPlayPrevNext = (value: 1 | -1) => {
     }
   }
 
-  // onUpdatePlayId(songState.songs[index]!.id)
+  onUpdatePlayId(songState.songs[index]!.id)
 }
 
 /**
@@ -124,6 +125,27 @@ const onUpdateDuration = ({ currentTime, duration }: { currentTime: number; dura
   songState.songs.find(item => item.id === songState.playId)!.duration = duration
 }
 
+let cacheTimer: number | null = null
+/**
+ * 清除缓存
+ */
+const onClearCache = () => {
+  uni.showLoading({ title: '清除中...', mask: true })
+  removeStorage(StorageKeyEnum.songState)
+  Object.assign(songState, initData())
+  // 重置内容
+  songState.songs = []
+  songState.playId = ''
+  songState.isPlay = false
+  songState.currentTime = 0
+
+  clearTimeout(cacheTimer as number)
+  cacheTimer = setTimeout(() => {
+    uni.hideLoading()
+    useToast('清除缓存成功')
+  }, 1000)
+}
+
 export const songStore = {
   state: readonly(songState),
   onUpdatePlayId,
@@ -138,5 +160,6 @@ export const songStore = {
   onTogglePlay,
   onPlayPrevNext,
   onUpdatePlayType,
-  onUpdateDuration
+  onUpdateDuration,
+  onClearCache
 }

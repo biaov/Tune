@@ -11,28 +11,33 @@ export const useAudio = () => {
   let bgAudioManager: UniApp.BackgroundAudioManager | null = null
   const initAudio = () => {
     if (!songStore.playItem.value) return
-    if (bgAudioManager && currentPlayId === songStore.playItem.value.id) return // 避免重复初始化
+    if (bgAudioManager) {
+      // 避免重复初始化
+      if (currentPlayId === songStore.playItem.value.id) return
+      bgAudioManager.stop()
+    } else {
+      bgAudioManager = uni.getBackgroundAudioManager()
+    }
     currentPlayId = songStore.playItem.value.id
-    bgAudioManager = uni.getBackgroundAudioManager()
     bgAudioManager.title = songStore.playItem.value.name
     bgAudioManager.singer = songStore.playItem.value.artist
     bgAudioManager.src = songStore.playItem.value.audio
     bgAudioManager.coverImgUrl = songStore.playItem.value.url
 
-    bgAudioManager.onPlay(() => {
-      console.log('播放中')
-    })
+    // bgAudioManager.onPlay(() => {
+    //   console.log('播放中')
+    // })
 
-    bgAudioManager.onPause(() => {
-      console.log('暂停')
-    })
+    // bgAudioManager.onPause(() => {
+    //   console.log('暂停')
+    // })
 
-    bgAudioManager.onStop(() => {
-      console.log('停止')
-    })
+    // bgAudioManager.onStop(() => {
+    //   console.log('停止')
+    // })
 
     bgAudioManager.onEnded(() => {
-      console.log('播放结束')
+      // console.log('播放结束')
       bgAudioManager = null
       songStore.onPlayPrevNext(1)
     })
@@ -41,19 +46,21 @@ export const useAudio = () => {
       if (!bgAudioManager) return
       const currentTime = ~~bgAudioManager.currentTime
       const duration = ~~bgAudioManager.duration
-      console.log({ currentTime, duration })
+      if (!duration) {
+        songStore.onTogglePlay(false)
+        useToast('播放失败')
+        return
+      }
       songStore.onUpdateDuration({ currentTime, duration })
     })
 
     bgAudioManager.onError(err => {
       if (!bgAudioManager) return
       songStore.onTogglePlay(false)
-      bgAudioManager = null
-      console.error('音频错误', err)
+      // console.error('音频错误', err)
       useToast('播放失败')
     })
   }
-
   watch(
     playState,
     bool => {
@@ -61,8 +68,8 @@ export const useAudio = () => {
       initAudio()
       if (!bgAudioManager) return
       if (bool) {
-        bgAudioManager.seek(songStore.state.currentTime)
-        bgAudioManager.play()
+        bgAudioManager!.seek(songStore.state.currentTime)
+        bgAudioManager!.play()
       } else {
         bgAudioManager.pause()
       }
