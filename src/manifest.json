@@ -43,17 +43,15 @@
           "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
           /* 保持屏幕唤醒权限, 用于后台音乐播放需要保持唤醒时使用 */
           "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-          /* 读取外部存储权限 */
-          "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>",
-          /* 写入外部存储权限 */
-          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
           /* 读取音频权限 */
           "<uses-permission android:name=\"android.permission.READ_MEDIA_AUDIO\"/>",
           /* 前台服务权限 */
           "<uses-permission android:name=\"android.permission.FOREGROUND_SERVICE\"/>"
+          /* 前台服务音乐播放权限 */
+          "<uses-permission android:name=\"android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK\"/>"
         ],
         "minSdkVersion": 30,
-        "targetSdkVersion": 30,
+        "targetSdkVersion": 34,
         "schemes": "tune"
       },
       /* ios打包配置 */

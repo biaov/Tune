@@ -70,7 +70,7 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
 export const useScanDir = (): Promise<SongItemType[]> => {
   return new Promise(resolve => {
     plus.android.requestPermissions(
-      ['android.permission.READ_EXTERNAL_STORAGE', 'android.permission.READ_MEDIA_AUDIO'],
+      ['android.permission.READ_MEDIA_AUDIO'],
       res => {
         // 存在未授权权限
         if (res.deniedPresent.length) {
