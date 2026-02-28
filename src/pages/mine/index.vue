@@ -10,11 +10,17 @@
 </template>
 
 <script setup lang="ts">
-const list = [
+const coverList = ['风景', '美女']
+const list = computed(() => [
   {
     name: '音乐源',
     desc: '管理音乐的加载位置',
     path: '/pages/mine/scan-file'
+  },
+  {
+    name: '封面选择',
+    desc: `当前封面：${coverList[songStore.state.coverIndex]}`,
+    key: 'cover'
   },
   {
     name: '重新扫描音乐',
@@ -26,10 +32,21 @@ const list = [
     desc: '清除缓存, 可能需要一些时间',
     key: 'clear'
   }
-]
-const onClick = (item: (typeof list)[0]) => {
+])
+
+songStore.state.coverIndex
+
+const onClick = (item: (typeof list.value)[0]) => {
   if (!item.path) {
     switch (item.key) {
+      case 'cover':
+        uni.showActionSheet({
+          itemList: coverList,
+          success: res => {
+            songStore.onUpdateCoverIndex(res.tapIndex)
+          }
+        })
+        break
       case 'scan':
         songStore.onScan()
         break

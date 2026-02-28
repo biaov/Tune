@@ -5,5 +5,10 @@ export enum StorageKeyEnum {
   /**
    * 歌曲
    */
-  songState = 'song-state'
+  songState = 'song-state',
+
+  /**
+   * 封面索引
+   */
+  coverIndex = 'cover-index'
 }

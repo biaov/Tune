@@ -22,7 +22,11 @@ const initData = () => ({
   /**
    * 当前播放时间
    */
-  currentTime: 0
+  currentTime: 0,
+  /**
+   * 封面索引
+   */
+  coverIndex: getStorage<number>(StorageKeyEnum.coverIndex, 0)
 })
 const songState = reactive(initData())
 
@@ -150,6 +154,14 @@ const onClearCache = () => {
   }, 1000)
 }
 
+/**
+ * 更新封面索引
+ */
+const onUpdateCoverIndex = (index: number) => {
+  songState.coverIndex = index
+  setStorage(StorageKeyEnum.coverIndex, index)
+}
+
 export const songStore = {
   state: readonly(songState),
   onUpdatePlayId,
@@ -165,5 +177,6 @@ export const songStore = {
   onPlayPrevNext,
   onUpdatePlayType,
   onUpdateDuration,
-  onClearCache
+  onClearCache,
+  onUpdateCoverIndex
 }

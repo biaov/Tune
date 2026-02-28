@@ -49,7 +49,7 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
         id: `${id}`,
         name: title || name,
         artist: artist && artist !== '<unknown>' ? artist : '未知',
-        url: `/static/cover/01/${useRandom(1, 10)}.png`, // '/static/default-cover.svg',
+        url: `/static/cover/0${songStore.state.coverIndex + 1}/${useRandom(1, 10)}.png`, // '/static/default-cover.svg',
         audio: `file://${path}`,
         createdTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         duration: duration / 1000,
