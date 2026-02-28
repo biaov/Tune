@@ -35,8 +35,13 @@ watch(
 )
 
 const onUpdatePlayId = (id: string, isPlay = true) => {
+  if (songStore.state.playId === id) return
   songState.playId = id
-  songState.isPlay = isPlay
+  songState.isPlay = false
+  songState.currentTime = 0
+  nextTick(() => {
+    songState.isPlay = isPlay
+  })
 }
 
 const removeSong = (id: string) => {
@@ -93,7 +98,6 @@ const onPlayPrevNext = (value: 1 | -1) => {
     return
   }
   onTogglePlay(false)
-  songState.currentTime = 0
   let index = 0
   if (songState.playType === PlayTypeEnum.random) {
     index = ~~(Math.random() * songState.songs.length)

@@ -13,7 +13,7 @@ export const useAudio = () => {
     if (!songStore.playItem.value) return
     if (bgAudioManager) {
       // 避免重复初始化
-      if (currentPlayId === songStore.playItem.value.id) return
+      if (currentPlayId === songStore.state.playId) return
       bgAudioManager.stop()
     } else {
       bgAudioManager = uni.getBackgroundAudioManager()
@@ -68,8 +68,8 @@ export const useAudio = () => {
       initAudio()
       if (!bgAudioManager) return
       if (bool) {
-        bgAudioManager!.seek(songStore.state.currentTime)
-        bgAudioManager!.play()
+        bgAudioManager.seek(songStore.state.currentTime)
+        bgAudioManager.play()
       } else {
         bgAudioManager.pause()
       }
