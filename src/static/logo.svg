@@ -1,10 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1024 1024" style="enable-background: new 0 0 1024 1024" xml:space="preserve" width="1024px" height="1024px">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  x="0px"
+  y="0px"
+  viewBox="0 0 1024 1024"
+  style="enable-background: new 0 0 1024 1024"
+  xml:space="preserve"
+  width="1024px"
+  height="1024px"
+>
   <style type="text/css">
     .st0 {
       fill: url(#SVGID_1_);
     }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .group {
+      transform-origin: center center;
+      animation: rotate 10s linear infinite;
+    }
   </style>
-  <g>
+  <g class="group">
     <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="218.5516" y1="218.5516" x2="805.4484" y2="805.4484">
       <stop offset="0" style="stop-color: #4e14ff" />
       <stop offset="1" style="stop-color: #2bfdd2" />

@@ -2,15 +2,13 @@
 
 一个简单的本地音乐播放器 👍
 
-<!-- <p align="center">
-    <a href="https://mineh5ui.biaov.cn/v2">
-        <img src="https://mineh5ui.biaov.cn/v2/logo.svg" width="200px" title="mineh5ui" alt="mineh5ui">
-    </a>
+<p align="center">
+  <img src="https://biaov.cn/static/tune/logo.svg" width="200px" title="Tune" alt="Tune" />
 </p>
- -->
 
 <h2 align="center">
-  <a href="https://github.com/biaov/mine-h5-ui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/biaov/mine-h5-ui.svg?logo=Unlicense" alt="mine-h5-ui" /></a>
+  <a href="https://github.com/biaov/Tune/releases"><img src="https://shields.io/github/v/release/biaov/Tune.svg?logo=github&label=version" alt="version" /></a>
+  <a href="https://github.com/biaov/Tune/blob/main/LICENSE"><img src="https://img.shields.io/github/license/biaov/Tune.svg?logo=Unlicense" alt="Tune" /></a>
 </h2>
 
 ## 技术栈
@@ -21,7 +19,7 @@
 
 - [最新版本](https://github.com/biaov/Tune/releases)
 
-## 功能
+## 特性
 
 - 本地音乐扫描
 - 音乐排序
