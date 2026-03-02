@@ -30,11 +30,13 @@
 
 ## 预览
 
-<img src="https://biaov.cn/static/tune/01.png" alt="预览图一" width="200px" />
-<img src="https://biaov.cn/static/tune/02.png" alt="预览图一" width="200px" />
-<img src="https://biaov.cn/static/tune/03.png" alt="预览图一" width="200px" />
-<img src="https://biaov.cn/static/tune/04.png" alt="预览图一" width="200px" />
-<img src="https://biaov.cn/static/tune/05.png" alt="预览图一" width="200px" />
+<p align="center">
+  <img src="https://biaov.cn/static/tune/01.png" alt="预览图一" width="200px" />
+  <img src="https://biaov.cn/static/tune/02.png" alt="预览图一" width="200px" />
+  <img src="https://biaov.cn/static/tune/03.png" alt="预览图一" width="200px" />
+  <img src="https://biaov.cn/static/tune/04.png" alt="预览图一" width="200px" />
+  <img src="https://biaov.cn/static/tune/05.png" alt="预览图一" width="200px" />
+</p>
 
 ## 贡献者们
 
