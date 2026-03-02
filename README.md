@@ -21,6 +21,23 @@
 
 - [最新版本](https://github.com/biaov/Tune/releases)
 
+## 功能
+
+- 本地音乐扫描
+- 音乐排序
+- 音乐播放控制
+- 音乐进度条
+- 音乐上一首下一首切换
+- 音乐搜索
+
+## 预览
+
+<img src="https://biaov.cn/static/tune/01.png" alt="预览图一" width="200px" />
+<img src="https://biaov.cn/static/tune/02.png" alt="预览图一" width="200px" />
+<img src="https://biaov.cn/static/tune/03.png" alt="预览图一" width="200px" />
+<img src="https://biaov.cn/static/tune/04.png" alt="预览图一" width="200px" />
+<img src="https://biaov.cn/static/tune/05.png" alt="预览图一" width="200px" />
+
 ## 贡献者们
 
 [![贡献者们](https://contrib.rocks/image?repo=biaov/Tune)](https://github.com/biaov/Tune/graphs/contributors)
