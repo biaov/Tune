@@ -15,6 +15,10 @@
 
 `Vue3.x` + `Vite` + `TypeScript` + `Uni-App` + `Less`
 
+## 支持平台
+
+- Android 系统
+
 ## 下载地址
 
 - [最新版本](https://github.com/biaov/Tune/releases)
