@@ -1,4 +1,3 @@
-
 /**
  * 标签枚举
  */
@@ -10,7 +9,7 @@ export enum TabEnum {
   /**
    * 歌手标签
    */
-  singer = 'singer',
+  singer = 'singer'
 }
 
 /**
@@ -24,5 +23,13 @@ export enum ModalButtonType {
   /**
    * 删除按钮
    */
-  delete = 'delete'
+  delete = 'delete',
+  /**
+   * 删除文件按钮
+   */
+  deleteFile = 'delete-file',
+  /**
+   * 文件路径按钮
+   */
+  filePath = 'file-path'
 }

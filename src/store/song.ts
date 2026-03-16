@@ -48,8 +48,17 @@ const onUpdatePlayId = (id: string, isPlay = true) => {
   })
 }
 
-const removeSong = (id: string) => {
-  songState.songs = songState.songs.filter(item => item.id !== id)
+const removeSong = (id: string, deleteLocal = false) => {
+  let curItem: SongItemType | null = null
+  songState.songs = songState.songs.filter(item => {
+    if (item.id === id) {
+      curItem = item
+      return false
+    } else {
+      return true
+    }
+  })
+  deleteLocal && curItem && useRemoveFile((curItem as SongItemType).id)
 }
 
 const playItem = computed(() => songState.songs.find(item => item.id === songState.playId))

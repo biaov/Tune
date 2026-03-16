@@ -77,3 +77,22 @@ export const useAudio = () => {
     { immediate: true }
   )
 }
+
+/**
+ * 删除文件
+ */
+export const useRemoveFile = (id: string) => {
+  const invoke = plus.android.invoke as (obj: string | PlusAndroidClassObject | PlusAndroidInstanceObject, name: string, ...args: unknown[]) => any
+  const activity = plus.android.runtimeMainActivity()
+  const contentResolver = invoke(activity, 'getContentResolver')
+  plus.android.importClass('android.provider.MediaStore')
+  plus.android.importClass('java.lang.Long')
+  // 直接拼字符串
+  const mediaUri = invoke('android.net.Uri', 'parse', `content://media/external/audio/media/${id}`)
+  const ArrayList = plus.android.importClass('java.util.ArrayList') as unknown as new () => string
+  const uriList = new ArrayList()
+  invoke(uriList, 'add', mediaUri)
+  const pendingIntent = invoke('android.provider.MediaStore', 'createDeleteRequest', contentResolver, uriList)
+  const intentSender = invoke(pendingIntent, 'getIntentSender') as unknown
+  invoke(activity, 'startIntentSenderForResult', intentSender, 42, null, 0, 0, 0)
+}

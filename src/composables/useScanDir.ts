@@ -24,27 +24,20 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
     // 可选：过滤只查询音乐（非铃声/通知音等），IS_MUSIC=1
     const selection = `${mediaStore.Audio.Media.IS_MUSIC} = 1`
     // 执行查询：用 plus.android.invoke 调用 Java 方法
-    const cursor = (plus.android.invoke as (obj: string | PlusAndroidClassObject | PlusAndroidInstanceObject, name: string, ...args: unknown[]) => any)(
-      contentResolver,
-      'query',
-      audioUri,
-      projection,
-      selection,
-      null,
-      null
-    )
+    const invoke = plus.android.invoke as (obj: string | PlusAndroidClassObject | PlusAndroidInstanceObject, name: string, ...args: unknown[]) => any
+    const cursor = invoke(contentResolver, 'query', audioUri, projection, selection, null, null)
     const audioList: SongItemType[] = []
     if (!cursor) return []
 
     // 移动游标并读取（同样用 invoke 调用 Cursor 方法）
-    while (plus.android.invoke(cursor, 'moveToNext')) {
-      const id = plus.android.invoke(cursor, 'getLong', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media._ID))
-      const title = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.TITLE))
-      const name = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DISPLAY_NAME))
-      const artist = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ARTIST))
-      const path = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DATA))
-      const duration = plus.android.invoke(cursor, 'getLong', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DURATION))
-      const album = plus.android.invoke(cursor, 'getString', plus.android.invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ALBUM))
+    while (invoke(cursor, 'moveToNext')) {
+      const id = invoke(cursor, 'getLong', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media._ID))
+      const title = invoke(cursor, 'getString', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.TITLE))
+      const name = invoke(cursor, 'getString', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DISPLAY_NAME))
+      const artist = invoke(cursor, 'getString', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ARTIST))
+      const path = invoke(cursor, 'getString', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DATA))
+      const duration = invoke(cursor, 'getLong', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.DURATION))
+      const album = invoke(cursor, 'getString', invoke(cursor, 'getColumnIndexOrThrow', mediaStore.Audio.Media.ALBUM))
       audioList.push({
         id: `${id}`,
         name: title || name,
@@ -58,7 +51,7 @@ export const useScanAndroidDirs = async (): Promise<SongItemType[]> => {
     }
 
     // 关闭游标（重要，避免内存泄漏）
-    plus.android.invoke(cursor, 'close')
+    invoke(cursor, 'close')
     return audioList
   } catch {
     return []

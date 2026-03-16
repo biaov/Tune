@@ -64,9 +64,19 @@ const modalList = [
     icon: 'play'
   },
   {
+    label: '文件路径',
+    value: ModalButtonType.filePath,
+    icon: 'file-path'
+  },
+  {
     label: '删除',
     value: ModalButtonType.delete,
     icon: 'delete'
+  },
+  {
+    label: '删除文件',
+    value: ModalButtonType.deleteFile,
+    icon: 'delete-file'
   }
 ]
 const onModalItem = (item: (typeof modalList)[0]) => {
@@ -76,6 +86,24 @@ const onModalItem = (item: (typeof modalList)[0]) => {
       break
     case ModalButtonType.delete:
       songStore.removeSong(moreItem.value!.id)
+      break
+    case ModalButtonType.deleteFile:
+      songStore.removeSong(moreItem.value!.id, true)
+      break
+    case ModalButtonType.filePath:
+      uni.showModal({
+        title: '文件路径',
+        content: moreItem.value!.audio.split('/emulated/0')[1],
+        cancelText: '关闭',
+        confirmText: '复制',
+        success: res => {
+          if (res.cancel) return
+          uni.setClipboardData({
+            data: moreItem.value!.audio,
+            showToast: true
+          })
+        }
+      })
       break
   }
   setDetailVisible(false)
