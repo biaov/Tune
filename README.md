@@ -31,6 +31,8 @@
 - 音乐进度条
 - 音乐上一首下一首切换
 - 音乐搜索
+- 查看文件路径
+- 删除源文件
 
 ## 预览
 
@@ -45,4 +47,3 @@
 ## 贡献者们
 
 [![贡献者们](https://contrib.rocks/image?repo=biaov/Tune)](https://github.com/biaov/Tune/graphs/contributors)
-
