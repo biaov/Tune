@@ -12,18 +12,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    copy: typeof import('./../src/components/t-icon copy.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TAnimationPlay: typeof import('./../src/components/t-animation-play.vue')['default']
-    TAudio: typeof import('./../src/components/t-audio.vue')['default']
     TButton: typeof import('./../src/components/t-button.vue')['default']
     TDropdown: typeof import('./../src/components/t-dropdown.vue')['default']
     TDropdownDiscrete: typeof import('./../src/components/t-dropdown-discrete.vue')['default']
     TIcon: typeof import('./../src/components/t-icon.vue')['default']
     TNoMore: typeof import('./../src/components/t-no-more.vue')['default']
     TPage: typeof import('./../src/components/t-page.vue')['default']
-    TScan: typeof import('./../src/components/t-scan.vue')['default']
     TScanFile: typeof import('./../src/components/t-scan-file.vue')['default']
     TSongItem: typeof import('./../src/components/t-song-item.vue')['default']
     TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
@@ -33,18 +30,15 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
-  const copy: typeof import('./../src/components/t-icon copy.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
   const TAnimationPlay: typeof import('./../src/components/t-animation-play.vue')['default']
-  const TAudio: typeof import('./../src/components/t-audio.vue')['default']
   const TButton: typeof import('./../src/components/t-button.vue')['default']
   const TDropdown: typeof import('./../src/components/t-dropdown.vue')['default']
   const TDropdownDiscrete: typeof import('./../src/components/t-dropdown-discrete.vue')['default']
   const TIcon: typeof import('./../src/components/t-icon.vue')['default']
   const TNoMore: typeof import('./../src/components/t-no-more.vue')['default']
   const TPage: typeof import('./../src/components/t-page.vue')['default']
-  const TScan: typeof import('./../src/components/t-scan.vue')['default']
   const TScanFile: typeof import('./../src/components/t-scan-file.vue')['default']
   const TSongItem: typeof import('./../src/components/t-song-item.vue')['default']
   const TTabPane: typeof import('./../src/components/t-tab-pane.vue')['default']
