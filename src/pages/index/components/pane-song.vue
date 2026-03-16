@@ -91,15 +91,16 @@ const onModalItem = (item: (typeof modalList)[0]) => {
       songStore.removeSong(moreItem.value!.id, true)
       break
     case ModalButtonType.filePath:
+      const cpContent = moreItem.value!.audio.split('/emulated/0')[1]!
       uni.showModal({
         title: '文件路径',
-        content: moreItem.value!.audio.split('/emulated/0')[1],
+        content: cpContent,
         cancelText: '关闭',
         confirmText: '复制',
         success: res => {
           if (res.cancel) return
           uni.setClipboardData({
-            data: moreItem.value!.audio,
+            data: cpContent,
             showToast: true
           })
         }
